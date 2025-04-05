@@ -22,8 +22,10 @@ const config: Config = {
       fontFamily: {
         sans: "var(--font-roboto), sans-serif",
         serif: "var(--font-roboto-serif), serif",
+        poppins: "var(--font-poppins), sans-serif",
       },
     },
+
   },
   plugins: [],
 };
