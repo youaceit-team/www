@@ -1,10 +1,8 @@
 import React from "react";
-import Header from "./components/layout/Header";
 
-export default function Home() {
+export default function About() {
   return (
     <main className="min-h-screen bg-gray-100 flex flex-col items-center justify-start p-6 font-poppins">
-      <Header />
       <div className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto mt-10">
         <h1 className="text-4xl font-bold mb-4 mt-48 text-black">
           Welcome to Aethos
