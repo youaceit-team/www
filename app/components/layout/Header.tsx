@@ -21,7 +21,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="p-6 bg-gray-100">
+    <div className="p-6">
       <nav
         className={`transition-all duration-300 ease-in-out fixed left-1/2 transform -translate-x-1/2 ${
           scrolled ? "w-5/12" : "w-6/12"
@@ -30,7 +30,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-4">
           <Image
-            src="/logo/aethos_small.png"
+            src=""
             alt="Logo"
             width={32}
             height={32}

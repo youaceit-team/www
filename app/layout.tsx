@@ -1,22 +1,24 @@
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import localFont from "next/font/local";
+
 import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 
 const poppins = localFont({
   src: [
     {
-      path: "../public/fonts/Poppins-Regular.ttf",
+      path: "../public/font/Poppins-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/Poppins-Bold.ttf",
+      path: "../public/font/Poppins-Bold.ttf",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../public/fonts/Poppins-Italic.ttf",
+      path: "../public/font/Poppins-Italic.ttf",
       weight: "400",
       style: "italic",
     },
@@ -26,8 +28,8 @@ const poppins = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Aethos",
-  description: "Coming soon",
+  title: "YouAceIt!",
+  description: "Not Just a Calendar.",
 };
 
 export default function RootLayout({
@@ -37,9 +39,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased bg-gray-100`}>
+      <body className={`${poppins.variable}`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
