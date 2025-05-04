@@ -1,26 +1,35 @@
 import FAQ from "./components/Faq";
 import StarBorder from "./components/animations/StarBorder";
 import SpotlightCard from "./components/SpotlightCard";
+import ShinyText from "./components/animations/ShinyText";
 
 export default function Home() {
   return (
-    <main className="h-fit flex flex-col items-center justify-start p-6 font-poppins">
-      
+    <main className="h-fit flex flex-col items-center justify-start font-poppins">
       {/* Introduction section */}
       <section className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto mt-10">
         {/* Slogan */}
-        <StarBorder
+        {/* <StarBorder
           as="div"
-          className="mt-32 text-2xl font-semibold text-center px-6 py-4"
+          className="mt-32 text-2xl font-semibold text-center py-4"
           color="white"
           speed="5s"
         >
           Not Just a Calendar.
-        </StarBorder>
+        </StarBorder> */}
+        <button className="mt-32 text-center py-4 bg-black rounded-2xl px-6 cursor-pointer">
+          <ShinyText
+            text="Not Just a Calendar."
+            disabled={false}
+            speed={2}
+            className="text-lg font-semibold text-white/60"
+          />
+        </button>
 
         {/* Tagline*/}
         <h2 className="text-6xl md:text-7xl text-center text-gray-800 mt-16 font-medium leading-snug">
-          Revolutionizing your Calendar Experience with <span className="text-[#fe4a22]">AI</span>.
+          Revolutionizing your Calendar Experience with{" "}
+          <span className="text-[#fe4a22]">AI</span>.
         </h2>
       </section>
 
@@ -32,13 +41,13 @@ export default function Home() {
             Exam stress ends with a plan that works.
           </h2>
           <p className="text-2xl text-right text-gray-600 md:w-3/8 mt-8 md:mt-0">
-            Ready for exciting, instantaneous, all-accessible insights in real time?
+            Ready for exciting, instantaneous, all-accessible insights in real
+            time?
           </p>
         </div>
 
         {/* Spotlight Cards */}
         <div className="flex flex-col md:flex-row justify-between gap-8 pb-60">
-          
           {/* Left SpotlightCard */}
           <SpotlightCard
             className="custom-spotlight-card flex-1 pb-140 pr-80 rounded-3xl shadow-md"
