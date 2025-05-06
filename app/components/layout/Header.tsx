@@ -41,8 +41,8 @@ export default function Header() {
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-4">
-          <Image src="/youaceit.png" alt="Logo" width={32} height={32} />
-          <span className="text-white text-xl font-bold">YouAceIt</span>
+          <Image src="/youaceit.png" alt="Logo" width={36} height={36} />
+          <span className="text-white text-xl font-medium">YouAceIt!</span>
         </Link>
 
         {/* Header Links */}

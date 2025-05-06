@@ -2,6 +2,7 @@ import FAQ from "./components/Faq";
 import StarBorder from "./components/animations/StarBorder";
 import SpotlightCard from "./components/SpotlightCard";
 import ShinyText from "./components/animations/ShinyText";
+import MailingList from "./components/MailingList";
 
 export default function Home() {
   return (
@@ -17,20 +18,48 @@ export default function Home() {
         >
           Not Just a Calendar.
         </StarBorder> */}
-        <button className="mt-32 text-center py-4 bg-black rounded-2xl px-6 cursor-pointer">
+        <button className="mt-32 text-center py-4 bg-black rounded-xl px-6 cursor-pointer">
           <ShinyText
             text="Not Just a Calendar."
             disabled={false}
             speed={2}
-            className="text-lg font-semibold text-white/60"
+            className="text-2xl font-semibold text-white/60"
           />
         </button>
 
-        {/* Tagline*/}
-        <h2 className="text-6xl md:text-7xl text-center text-gray-800 mt-16 font-medium leading-snug">
-          Revolutionizing your Calendar Experience with{" "}
-          <span className="text-[#fe4a22]">AI</span>.
-        </h2>
+        {/* Tagline with sticky notes */}
+        <div className="relative w-full flex justify-center items-center mt-16 px-4">
+          {/* Left Sticky Note */}
+          <img
+            src="/assets/sticky_left.svg"
+            alt="Sticky Note Left"
+            className="absolute left-0 -translate-y-1/2 -rotate-[-10deg] w-172 sm:w-176 md:w-180 -ml-144 md:-ml-148"
+            style={{ top: '65%' }}
+          />
+
+          {/* Right Sticky Note */}
+          <img
+            src="/assets/sticky_right.svg"
+            alt="Sticky Note Right"
+            className="absolute right-0 -translate-y-1/2 rotate-[-15deg] w-172 sm:w-176 md:w-180 -mr-144 md:-mr-148"
+            style={{ top: '40%' }}
+          />
+
+          {/* Main Header */}
+          <h2 className="text-7xl md:text-8xl text-center text-gray-800 font-medium leading-snug max-w-full w-full">
+            Smarter Schedule. <br />Better Results. <br />Backed by {" "}
+            <span className="text-[#fe4a22] text">Science</span>.
+          </h2>
+        </div>
+
+      </section>
+
+      <section className="w-full flex justify-center items-center mt-24">
+        <img
+          src="/models/ipad_iphone.svg"
+          alt="Showcase"
+          className="w-full max-w-7xl object-contain"
+        />
       </section>
 
       {/* More Information section */}
@@ -64,12 +93,12 @@ export default function Home() {
 
       {/* FAQ section */}
       <section className="w-full mt-32 px-8 md:px-20">
-        <div className="text-center mb-8">
-          <h2 className="text-5xl md:text-6xl text-gray-800">
-            Frequently Asked Questions
-          </h2>
-        </div>
         <FAQ />
+      </section>
+
+      {/* Mailing list section */}
+      <section className="w-full mt-32 px-8 md:px-20">
+        <MailingList />
       </section>
     </main>
   );

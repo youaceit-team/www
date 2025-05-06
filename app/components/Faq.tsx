@@ -61,6 +61,11 @@ export default function FAQ() {
 
   return (
     <div className="w-full text-black px-8 md:px-20 py-12 text-sm md:text-base">
+              <div className="text-center mb-8">
+          <h2 className="text-6xl md:text-7xl text-gray-800">
+            Frequently Asked Questions
+          </h2>
+        </div>
       {/* FAQ List Section */}
       <section className="w-full max-w-screen mx-auto flex flex-col items-center justify-center gap-8">
         <AnimatedList

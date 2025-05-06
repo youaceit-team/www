@@ -98,3 +98,30 @@ body {
 .animate-star-movement-top {
   animation: star-movement-top linear infinite alternate;
 }
+
+/* Marquee Animation */
+.marquee-container {
+  overflow: clip;
+}
+
+.marquee {
+  --gap: 20px;
+  --speed: 15s;
+  --direction: forwards;
+
+  width: max-content;
+  padding-left: var(--gap);
+  gap: var(--gap);
+
+  animation-name: marquee-animation;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--speed);
+  animation-direction: var(--direction);
+}
+
+@keyframes marquee-animation {
+  to {
+    transform: translateX(-50%);
+  }
+}
