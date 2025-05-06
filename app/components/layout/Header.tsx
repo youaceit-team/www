@@ -16,14 +16,15 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      if (currentScrollY < lastScrollY.current) {
-        setScrollingUp(true); // Scrolling up — grow
-      } else {
-        setScrollingUp(false); // Scrolling down — shrink
+      const threshold = 20; // Add a threshold to prevent frequent toggling
+      if (Math.abs(currentScrollY - lastScrollY.current) > threshold) {
+        if (currentScrollY < lastScrollY.current) {
+          setScrollingUp(true); // Scrolling up — grow
+        } else {
+          setScrollingUp(false); // Scrolling down — shrink
+        }
+        lastScrollY.current = currentScrollY;
       }
-
-      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -37,50 +38,48 @@ export default function Header() {
           width: scrollingUp ? "50%" : "25%", // grow when scrolling up
         }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
-        className="fixed left-1/2 transform -translate-x-1/2 z-50 mx-auto bg-black text-white flex items-center justify-between px-6 py-2 rounded-2xl"
+        className="fixed left-1/2 transform -translate-x-1/2 z-50 mx-auto bg-black text-white rounded-2xl"
       >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-4">
-          <Image src="/youaceit.png" alt="Logo" width={36} height={36} />
-          <span className="text-white text-xl font-medium">YouAceIt!</span>
-        </Link>
+        <div className="flex items-center justify-between px-6 py-2 relative">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-4">
+            <Image src="/youaceit.png" alt="Logo" width={36} height={36} />
+            <span className="text-white text-xl font-medium">YouAceIt!</span>
+          </Link>
 
-        {/* Header Links */}
-        <AnimatePresence>
-          {scrollingUp && (
-            <motion.div
-              key="nav-links"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="bg-[#1a1a1a] px-6 py-3 rounded-2xl gap-16 flex"
-            >
-              {navLinks.map(({ label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="text-white text-md hover:text-gray-300 hover:scale-105 transition duration-300 ease-in-out whitespace-nowrap shrink-0"
-                >
-                  {label}
-                </a>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+          {/* Center Content - Nav Links */}
+          <AnimatePresence>
+            {scrollingUp && (
+              <motion.div
+                key="nav-links"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="absolute left-1/2 transform -translate-x-1/2 bg-[#1a1a1a] px-6 py-3 rounded-2xl flex gap-16"
+              >
+                {navLinks.map(({ label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    className="text-white text-md hover:text-gray-300 hover:scale-105 transition duration-300 ease-in-out whitespace-nowrap shrink-0"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-        {/* Sign Up Button */}
-
-        <motion.button
-          key="pricing-button"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="bg-white text-black text-md font-medium rounded-xl px-8 py-3 hover:bg-gray-200"
-        >
-          Pricing
-        </motion.button>
+          {/* Pricing Button - Fixed position */}
+          <motion.button
+            layout
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="bg-white text-black text-md font-medium rounded-xl px-8 py-3 hover:bg-gray-200 shrink-0 z-10"
+          >
+            Pricing
+          </motion.button>
+        </div>
       </motion.nav>
     </div>
   );
