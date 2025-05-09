@@ -2,7 +2,7 @@ import React from "react";
 
 export default function MailingList() {
   return (
-    <div className="bg-white text-center pb-16 px-4 sm:px-6 lg:px-8 rounded-lg shadow-md relative">
+    <div className="text-center pb-16 px-4 sm:px-6 lg:px-8 rounded-lg shadow-md relative">
       {/* Heading */}
       <h2 className="text-6xl md:text-7xl text-gray-800">
         Join Our Mailing List

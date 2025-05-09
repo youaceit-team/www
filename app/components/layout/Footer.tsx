@@ -36,7 +36,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-black text-white px-8 md:px-20 py-12 text-sm md:text-base">
+    <footer className="bg-[#1c1c1e] text-white px-8 md:px-20 py-12 text-sm md:text-base">
       {/* Mobile: Email + Social */}
       <div className="flex flex-col md:hidden items-start gap-4 mb-12 mt-5">
         <a

@@ -5,68 +5,64 @@ import AnimatedList from "./animations/AnimatedList";
 export default function FAQ() {
   const FAQ_LIST = [
     {
-      question: "Can my team be composed of members from different schools?",
-      answer: "Absolutely, as long as each teammate meets the eligibility criteria!",
-    },
-    {
-      question: "Can I change the name and details of my team after registration?",
-      answer: "The information submitted during registration is final.",
-    },
-    {
-      question: "Should I participate even if I have not studied H2 or Olympiad level economics?",
+      question: "What is YouAceIt?",
       answer:
-        "Yes! All Pre-U students, regardless of their subjects, can participate in the school category. SEL has questions of a wide range of difficulties, so you can challenge yourself regardless of your economics proficiency.",
+        "YouAceIt is the world’s first exam performance optimizer. A smart scheduling platform designed to help students align their studies, health, and deadlines to maximize academic outcomes.",
     },
     {
-      question: "Should I participate in the School Category or Open Category?",
+      question: "Who should use YouAceIt?",
       answer:
-        "SEL collaborates with JCs and schools by sharing the performance of their students who have registered under the School Category. Thus, only participants of the school category will have their prizes and awards recorded in their CCA certificates and transcripts.",
+        "Any student preparing for critical exams. Whether it's A-levels, IB, university finals, or professional certifications, YouAceIt helps you study smarter, not harder.",
     },
     {
-      question: "May I participate even if I am not studying in Singapore?",
+      question: "How is YouAceIt different from other calendar apps?",
       answer:
-        "Yes, you may. The same restrictions on the School and Open Category will apply: only students who are all studying in Pre-University education may participate in the school category.",
+        "Unlike traditional tools like Google Calendar or Notion, YouAceIt intelligently plans your study time. It analyzes your availability, task urgency, and personal focus patterns to recommend exactly what to study and when.",
     },
     {
-      question: "May I use the internet during this competition?",
+      question: "What features does YouAceIt offer?",
       answer:
-        "Yes! Most online resources such as textbooks, research papers, graphing calculators, and computing software can all be used to aid in solving questions. The one exception is that any usage of AI tools such as Chatbots is strictly prohibited.",
+        "YouAceIt includes Smart Task Prioritization, Dynamic Study Block Suggestions, Google Calendar Integration, Deadline-Aware Scheduling, and more features coming soon...",
     },
     {
-      question: "How do we obtain new problems to solve during the contest?",
+      question: "Do I need to input everything manually?",
       answer:
-        "After completing or skipping an existing question, your team can choose new questions from a pool of subsequent questions. You can attempt a maximum of 4 main problems at any one time.",
+        "Not at all! Once you connect your calendar and enter your exams and tasks, YouAceIt takes over, offering optimized plans with minimal manual input.",
     },
     {
-      question: "How hard are SEL questions?",
+      question: "Is YouAceIt powered by AI?",
       answer:
-        "SEL questions range in difficulty from those similar to the ones you have encountered in school, to questions set at the undergraduate and olympiad level.",
+        "Yes! Our AI models evaluate task priority, suggest high-focus time slots, adapt to your rhythm, and help you maintain balance. This prevents burnout while boosting results!",
     },
     {
-      question: "What happens if I submit a wrong answer?",
+      question: "What if my schedule changes?",
       answer:
-        "You can reattempt a question-part as many times as you need, but the points awarded for a correct answer will decrease after incorrect attempts. Certain questions such as MCQs have a limit of 3 attempts.",
+        "No problem. Your calendar syncs in real time, and YouAceIt automatically reoptimizes your study blocks around any changes.",
     },
     {
-      question: "May I skip questions?",
+      question: "Is YouAceIt free to use?",
       answer:
-        "Yes, but 2 points will be deducted from your team's overall score per skip. Your team will receive a free skip that allows you to skip a question without penalty every 30 minutes.",
+        "YouAceIt will launch with a free plan that includes all essential features. A premium version with advanced insights and personalization will be available soon.",
     },
     {
-      question: "How do I obtain bonus points?",
+      question: "Which platforms is YouAceIt available on?",
       answer:
-        "From 10 am, the Economania section will be unlocked, featuring 5 categories of 3 questions each in ascending difficulty. If your team completes some or all categories of Economania before 11 am, the points which your team obtained from those categories will be doubled.",
+        "YouAceIt is current available on both iOS and Android devices! Though, stay tuned for a web version 👀!",
+    },
+    {
+      question: "How do I start using YouAceIt?",
+      answer:
+        "Simply download the app and sign up. We'll guide you through the rest.",
     },
   ];
 
   return (
     <div className="w-full text-black px-8 md:px-20 py-12 text-sm md:text-base">
-              <div className="text-center mb-8">
-          <h2 className="text-6xl md:text-7xl text-gray-800">
-            Frequently Asked Questions
-          </h2>
-        </div>
-      {/* FAQ List Section */}
+      <div className="text-center mb-8">
+        <h2 className="text-6xl md:text-7xl text-gray-800">
+          Frequently Asked Questions
+        </h2>
+      </div>
       <section className="w-full max-w-screen mx-auto flex flex-col items-center justify-center gap-8">
         <AnimatedList
           items={FAQ_LIST}
