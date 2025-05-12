@@ -56,9 +56,8 @@ export default function Footer() {
         </a>
       </div>
 
-      {/* Main content container */}
+      {/* Main content */}
       <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-20 mt-20">
-        {/* Navigation sections: stacked on mobile, horizontal on desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 md:gap-20 text-[#737373] text-sm md:text-lg md:mb-0">
           {sections.map((section) => (
             <div key={section.title}>

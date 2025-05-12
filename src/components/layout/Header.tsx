@@ -4,7 +4,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navLinks = [
+interface DropdownItem {
+  label: string;
+  href: string;
+}
+
+interface DropdownColumn {
+  header: string;
+  items: DropdownItem[];
+}
+
+interface DropdownContent {
+  leftColumn: DropdownColumn;
+  rightColumn: DropdownColumn;
+}
+
+interface NavLink {
+  label: string;
+  href: string;
+  hasDropdown: boolean;
+  dropdown?: DropdownContent;
+}
+
+const navLinks: NavLink[] = [
   { 
     label: "Product", 
     href: "#",
@@ -97,12 +119,12 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY < lastScrollY.current) {
-        setScrollingUp(true);
-      } else {
-        setScrollingUp(false);
+      const threshold = 20;
+      
+      if (Math.abs(currentScrollY - lastScrollY.current) > threshold) {
+        setScrollingUp(currentScrollY < lastScrollY.current);
+        lastScrollY.current = currentScrollY;
       }
-      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -110,7 +132,6 @@ export default function Header() {
   }, []);
 
   const handleMouseEnter = (label: string) => {
-    // Clear any existing timeout to prevent dropdown from closing
     if (dropdownTimeout.current) {
       clearTimeout(dropdownTimeout.current);
       dropdownTimeout.current = null;
@@ -119,39 +140,70 @@ export default function Header() {
   };
 
   const handleMouseLeave = () => {
-    // Add a small delay before closing dropdown for smoother transitions
     dropdownTimeout.current = setTimeout(() => {
       setActiveDropdown(null);
     }, 100);
   };
 
-  // Calculate dropdown position with corrected alignment
   const getDropdownPosition = (label: string) => {
-    if (navItemRefs.current[label]) {
-      const navItemRect = navItemRefs.current[label]?.getBoundingClientRect();
-      
-      if (navItemRect) {
-        // Center the dropdown under the nav item with a slight offset to align with left edge of text
-        const leftOffset = label === "Product" ? navItemRect.left : navItemRect.left;
+    const navItem = navItemRefs.current[label];
+    if (!navItem) return {};
+    
+    const navItemRect = navItem.getBoundingClientRect();
+    return {
+      top: `${navItemRect.bottom + 12}px`,
+      left: `${navItemRect.left}px`,
+      width: '460px',
+      transformOrigin: 'top left'
+    };
+  };
+
+  const renderDropdownContent = () => {
+    const activeLink = navLinks.find(link => link.label === activeDropdown);
+    if (!activeLink?.dropdown) return null;
+
+    return (
+      <div className="flex p-6">
+        {/* Left Column */}
+        <div className="flex-1 pr-8 border-r border-gray-100">
+          <h3 className="font-medium text-gray-900 mb-4">
+            {activeLink.dropdown.leftColumn.header}
+          </h3>
+          {activeLink.dropdown.leftColumn.items.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="block py-2 text-sm text-gray-800 hover:text-gray-600 transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
         
-        return {
-          top: (navItemRect.bottom + 12) + 'px',
-          left: leftOffset + 'px',
-          width: '460px',
-          transformOrigin: 'top left'
-        };
-      }
-    }
-    return {};
+        {/* Right Column */}
+        <div className="flex-1 pl-8">
+          <h3 className="font-medium text-gray-900 mb-4">
+            {activeLink.dropdown.rightColumn.header}
+          </h3>
+          {activeLink.dropdown.rightColumn.items.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="block py-2 text-sm text-gray-800 hover:text-gray-600 transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   return (
     <div className="p-6">
       <motion.nav
         ref={navRef}
-        animate={{
-          width: scrollingUp ? "70%" : "35%",
-        }}
+        animate={{ width: scrollingUp ? "70%" : "35%" }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
         className="fixed left-1/2 transform -translate-x-1/2 z-50 mx-auto bg-[#ffffff] text-white flex items-center justify-between px-6 py-2 rounded-2xl shadow-md"
       >
@@ -180,7 +232,6 @@ export default function Header() {
                   onMouseLeave={hasDropdown ? handleMouseLeave : undefined}
                   ref={(el) => { navItemRefs.current[label] = el; }}
                 >
-                  {/* Make dropdown items non-clickable with indicator */}
                   {hasDropdown ? (
                     <div className="text-black text-md cursor-default whitespace-nowrap shrink-0 relative flex items-center">
                       {label}
@@ -202,9 +253,8 @@ export default function Header() {
           )}
         </AnimatePresence>
 
-        {/* Auth Buttons Group - Fixed position in the nav */}
+        {/* Auth Buttons */}
         <div className="flex items-center gap-3 ml-auto">
-          {/* Login Button - Only visible when scrolling up */}
           <AnimatePresence>
             {scrollingUp && (
               <motion.button
@@ -220,7 +270,6 @@ export default function Header() {
             )}
           </AnimatePresence>
 
-          {/* Sign Up Button - Always visible */}
           <motion.button
             key="signup-button"
             initial={{ opacity: 0, y: -10 }}
@@ -234,16 +283,16 @@ export default function Header() {
         </div>
       </motion.nav>
       
-      {/* Detached Dropdown Menu with improved animations */}
+      {/* Dropdown Menu */}
       <AnimatePresence>
-        {activeDropdown && navLinks.find(link => link.label === activeDropdown)?.dropdown && (
+        {activeDropdown && (
           <motion.div
             initial={{ opacity: 0, y: 8, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ 
               duration: 0.25, 
-              ease: [0.04, 0.62, 0.23, 0.98], // Custom easing for smoother animation
+              ease: [0.04, 0.62, 0.23, 0.98],
               opacity: { duration: 0.2 } 
             }}
             style={getDropdownPosition(activeDropdown)}
@@ -251,39 +300,7 @@ export default function Header() {
             onMouseEnter={() => handleMouseEnter(activeDropdown)}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="flex p-6">
-              {/* Left Column */}
-              <div className="flex-1 pr-8 border-r border-gray-100">
-                <h3 className="font-medium text-gray-900 mb-4">
-                  {navLinks.find(link => link.label === activeDropdown)?.dropdown?.leftColumn.header}
-                </h3>
-                {navLinks.find(link => link.label === activeDropdown)?.dropdown?.leftColumn.items.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className="block py-2 text-sm text-gray-800 hover:text-gray-600 transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-              
-              {/* Right Column */}
-              <div className="flex-1 pl-8">
-                <h3 className="font-medium text-gray-900 mb-4">
-                  {navLinks.find(link => link.label === activeDropdown)?.dropdown?.rightColumn.header}
-                </h3>
-                {navLinks.find(link => link.label === activeDropdown)?.dropdown?.rightColumn.items.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className="block py-2 text-sm text-gray-800 hover:text-gray-600 transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            {renderDropdownContent()}
           </motion.div>
         )}
       </AnimatePresence>

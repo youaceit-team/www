@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./styles/globals.css";
 import localFont from "next/font/local";
 
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
 const poppins = localFont({
   src: [
@@ -29,7 +29,7 @@ const poppins = localFont({
 
 export const metadata: Metadata = {
   title: "YouAceIt!",
-  description: "Not Just a Calendar.",
+  description: "Smater Schedule. Better Results. Backed By Science.",
 };
 
 export default function RootLayout({
