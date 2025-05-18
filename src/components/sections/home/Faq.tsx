@@ -1,6 +1,6 @@
 "use client";
 
-import AnimatedList from "./animations/AnimatedList";
+import AnimatedList from "../../animations/AnimatedList";
 
 export default function FAQ() {
   const FAQ_LIST = [
